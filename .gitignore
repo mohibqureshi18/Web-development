@@ -1,36 +1,83 @@
-# Node.js dependencies
+# =========================
+# Node.js / JavaScript
+# =========================
 node_modules/
 npm-debug.log*
 yarn-error.log
+package-lock.json
+yarn.lock
 
 # Logs
 logs/
 *.log
+pids/
+*.pid
+*.seed
+*.pid.lock
 
-# OS files
-.DS_Store
-Thumbs.db
-
-# VS Code settings
-.vscode/
-
-# Build directories
+# =========================
+# Build / Output directories
+# =========================
 dist/
 build/
+coverage/
+out/
+*.tsbuildinfo
 
+# =========================
 # Environment files
+# =========================
 .env
 .env.local
 .env.*.local
 
-# Mac OS
-*.DS_Store
-
-# Windows
+# =========================
+# OS files
+# =========================
+.DS_Store
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 
-# Optional: JetBrains IDEs
+# =========================
+# IDE / Editor settings
+# =========================
+.vscode/
 .idea/
-*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# =========================
+# Testing / Coverage
+# =========================
+coverage/
+*.lcov
+
+# =========================
+# Misc
+# =========================
+*.swp
+*.bak
+*.tmp
+*.log
+*.orig
+
+# =========================
+# Front-end framework / libraries
+# =========================
+# React
+build/
+.cache/
+.next/
+out/
+
+# Angular
+.angular/
+dist/
+.tmp/
+
+# Vue
+dist/
+*.local
