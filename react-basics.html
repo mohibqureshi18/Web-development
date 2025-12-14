@@ -1,20 +1,136 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>React Basics</title>
-  </head>
-  <body>
-    <div class="js-container"></div>
 
-    <script src="react-basics.js"></script>
-    
-    <script src="https://unpkg.com/supersimpledev/react.js"></script>
-    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+<head>
+  <title>React Basics</title>
+  <style>
+    .js-container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .second-container{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .red {
+      height: 450px;
+      width: 450px;
+      background-color: rgb(133, 25, 25);
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
-    <script type="text/babel">
-      const container = document.querySelector('.js-container');
-      ReactDOM.createRoot(container).render('Welcome to SuperSimpleDev React Course');
-    </script>
-  </body>
+    }
+
+    .green {
+      height: 270px;
+      width: 270px;
+      background-color: rgb(131, 231, 64);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+
+    .blue {
+      height: 130px;
+      width: 130px;
+      background-color: rgb(117, 142, 255);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: spin 1s;
+    }
+
+    .button-style {
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+
+      background: linear-gradient(135deg, #3d36c2, #00a7f5);
+      color: #ffffff;
+
+      cursor: pointer;
+      
+      box-shadow: 0 6px 15px rgba(27, 24, 119, 0.5);
+    }
+    .text-style{
+      margin: 20px 17px;
+    }
+
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="js-container"></div>
+
+  <script src="react-basics.js"></script>
+
+  <script src="https://unpkg.com/supersimpledev/react.js"></script> <!-- external library -->
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script> <!-- external library -->
+
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script> <!-- E.L. it translates JSX into normal JS -->
+
+  <script type="text/babel">
+    const app = (
+      <div className="second-container">
+        <div className="red">
+          <div className="green">
+            <div className="blue"></div>
+          </div>
+        </div>
+
+        <div className="Exercise1a">
+          <br />
+          <button className="button-style">Good job</button> 
+        </div>
+
+        <div className="Exercise1b"><br />
+          <p className="text-style">My name is Mohib</p>
+          <hr />
+        </div>
+
+        <div className="exercise1c">
+          <label className="text-style">Cotton socks</label>
+          <br />
+          <br />
+          <label className="text-style">Price: </label>
+          <label className="text-style">$10</label>
+          <br />
+          <br />
+          <button className="button-style">Add to Cart</button>
+        </div>
+      </div>
+    );
+
+    const container = document.querySelector('.js-container');
+    ReactDOM.createRoot(container).render(app);
+
+  </script>
+</body>
+
 </html>
+
+<!-- This lesson included:
+ 1. React = external library that helps is create website easier
+ 2. load the react external library
+ 3. setup react and use .render()
+ 4. reviewed basics of HTML and JS
+ 5. JSX = enhanced version of JS
+ 6. Created Elements directly with JSX
+ 7. Insert values into JSX elements -->
