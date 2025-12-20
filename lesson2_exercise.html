@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2 Exercise</title>
+</head>
+
+<body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script> <!-- external library -->
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script> <!-- external library -->
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script> <!-- E.L. it translates JSX into normal JS -->
+
+    <script type="text/babel">
+
+        function LoginForm() {
+            return (
+                <>
+                    <input type="text" placeholder="Email" /><br />
+                    <input type="Password" placeholder="Password" /><br />
+                    <button>Login</button>
+                    <button>Sign Up</button>
+                </>
+            );
+        }
+
+        function App() {
+            return (
+                <>
+                    <p>Hello, this is my website</p>
+                    <LoginForm />
+                </>
+                /*<>
+                    <p>Hello React</p>
+                    <p>Hello Welcome to my website</p>
+                    <button >Login</button>
+                    <button>Sign Up</button>
+                    <p>Hello, Welcome to my website</p>
+                    <input type="text" placeholder="Email" /> <br />
+                    <input type="Password" placeholder="Password" /><br />
+                    <button>Login</button>
+                    <button>Sign UP</button> 
+
+                </>*/
+            );
+        }
+
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(<App />)
+
+    </script>
+</body>
+
+</html>
