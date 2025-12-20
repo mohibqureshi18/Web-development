@@ -20,32 +20,57 @@
 
     <script type="text/babel">
         function ProductDetails(props) {
+            const { name, price, discountPrice, imageSrc } = props; //Destructuring props = more readability
+            return (
+
+                <div style={{ border: '1px solid gray', padding: '8px', margin: '8px', height: 'auto', width: '160px', display: 'inline-block' }}>
+
+                    <img src={imageSrc} style = {{width: '100%'}} alt={name}/>
+                    
+                    <p><strong>{name}</strong></p>
+
+                    <p>
+                        Price: {props.discountPrice ?
+                            <del>
+                                ${props.price}
+                            </del> : `$${props.price}`}
+                    </p>
+
+                    {
+                        props.discountPrice && (
+                            <p>Discount price: ${props.discountPrice} </p>
+                        )
+                    }
+
+                    <button>Add to Cart</button>
+                </div>
+            );
+        }
+
+        function App() {
             return (
                 <>
-                    <p>{props.name}</p>
+                    <ProductDetails
+                        name="Cotton Socks"
+                        price="10.90"
+                        discountPrice="5.45"
+                    />
 
-                    <p>Price: {props.discountPrice ? <del>${props.price}</del>: `$${props.price}`}</p>
-                    {
-                            props.discountPrice && (
-                                <p>Discount price: ${props.discountPrice} </p>
-                            )
-                        }
-                        <button>Add to Cart</button>
-                    </>
-                    );
-        }
+                    <ProductDetails
+                        name="Tennis Balls"
+                        price="6.00"
+                    />
 
-                    function App() {
-            return (
-                    <>
-                        <ProductDetails name="Cotton Socks" price="10.90" discountPrice="5.45" />
-                        <ProductDetails name="Tennis Balls" price="6.00" />
-                        <ProductDetails name="Plain T-Shirt" price="7.99" />
-                    </>
-                    );
+                    <ProductDetails
+                        name="Plain T-Shirt"
+                        price="7.99"
+                    />
+
+                </>
+            );
         }
-                    const container = document.querySelector('.js-container');
-                    ReactDOM.createRoot(container).render(<App />);
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(<App />);
     </script>
 
 </body>
