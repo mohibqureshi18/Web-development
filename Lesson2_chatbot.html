@@ -19,31 +19,62 @@
   <script src="https://unpkg.com/supersimpledev/react.js"></script> <!-- external library -->
   <script src="https://unpkg.com/supersimpledev/react-dom.js"></script> <!-- external library -->
 
+  <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
   <script src="https://unpkg.com/supersimpledev/babel.js"></script> <!-- E.L. it translates JSX into normal JS -->
 
   <script type="text/babel">
-    function ChatInput() {
+    function ChatInput({ chatMessages, setChatMessages }) {
+      const [inputText, setInputText] = React.useState('');
+
+      function saveInputText(event) {
+        setInputText(event.target.value);
+      }
+
+      function sendMessage() {
+
+        const newChatMessages = [
+          ...chatMessages,
+          {
+            message: inputText,
+            sender: 'user',
+            id: crypto.randomUUID()
+          }
+        ]
+
+        setChatMessages(newChatMessages);
+
+        const response = Chatbot.getResponse(inputText);
+
+        setChatMessages([
+          ...newChatMessages,
+          {
+            message: response,
+            sender: 'robot',
+            id: crypto.randomUUID()
+          }
+        ]);
+
+        setInputText('');
+
+
+      }
+
       return (
         <>
           <input type="text"
             placeholder="Send message to Chatbot"
-            size="30" />
-
-          <button>Send</button>
+            size="30"
+            onChange={saveInputText}
+            value={inputText}
+          />
+          <button onClick={sendMessage} >
+            Send
+          </button>
         </>
       );
     }
 
     function ChatMessage({ message, sender }) {
-      /*
-      if (sender === 'robot') {
-        return (
-          <div>
-            <img src="ChatBot_pfp.jpg" width="50" />
-            {message}
-          </div>
-        );
-      } */
       return (
         <div>
           {
@@ -59,8 +90,25 @@
       );
     }
 
-    function ChatMessages() {
-      const array = React.useState([{
+    function ChatMessages({ chatMessages }) {
+      return (
+        <>
+          {chatMessages.map((chatMessage) => {
+            return (
+              <ChatMessage
+                message={chatMessage.message}
+                sender={chatMessage.sender}
+                key={chatMessage.id}
+              />
+            );
+          })}
+        </>
+      );
+    }
+
+    function App() {
+
+      const [chatMessages, setChatMessages] = React.useState([{
         message: 'Hello Chatbot',
         sender: 'user',
         id: 'id1'
@@ -78,44 +126,15 @@
         id: 'id4'
       }]);
 
-      const chatMessages = array[0];
-      const setChatMessages = array[1];
-
-
-      function sendMessage(){
-        setChatMessages([
-          ...chatMessages,
-          {
-            message:'test',
-            sender:'user',
-            id: crypto.randomUUID()
-          }
-        ]);
-        
-      }
-
       return (
         <>
-          <button onClick={sendMessage} >Send message</button>
-
-          {chatMessages.map((chatMessage) => {
-            return (
-              <ChatMessage
-                message={chatMessage.message}
-                sender={chatMessage.sender}
-                key={chatMessage.id}
-              />
-            );
-          })}
-        </>
-      );
-    }
-
-    function App() {
-      return (
-        <>
-          <ChatInput />
-          <ChatMessages />
+          <ChatInput
+            chatMessages={chatMessages}
+            setChatMessages={setChatMessages}
+          />
+          <ChatMessages
+            chatMessages={chatMessages}
+          />
         </>
       );
     }
@@ -127,20 +146,3 @@
 </body>
 
 </html>
-
-<!--
-
-1. Component is a piece of website
-2. component helps create our own HTML elements
-3. Started a ChatBot Project
-4. Split the ChatBot into <ChatInput> and <ChatMessage>
-5. props helps make component reusable
-6. Destructuring, Guard Operator (&&)
-7. Code cleanup
-8. Created <App> component
-  
-  const message = props.message;
-  const sender = props.message;
-  this can also be written as:
-  const {message, sender} = props;  this is the destructring
-  -->
