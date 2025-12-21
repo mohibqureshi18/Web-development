@@ -59,8 +59,7 @@
       );
     }
 
-
-    function App() {
+    function ChatMessages() {
       const chatMessages = [{
         message: 'Hello Chatbot',
         sender: 'user',
@@ -79,18 +78,38 @@
         id: 'id4'
       }];
 
+      function sendMessage(){
+        chatMessages.push({
+          message: 'test',
+          sender: 'user',
+          id: crypto.randomUUID()
+        });
+
+        console.log(chatMessages);
+      }
+
       return (
         <>
-          <ChatInput />
+          <button onClick={sendMessage} >Send message</button>
+
           {chatMessages.map((chatMessage) => {
             return (
               <ChatMessage
                 message={chatMessage.message}
                 sender={chatMessage.sender}
-                key= {chatMessage.id}
+                key={chatMessage.id}
               />
             );
           })}
+        </>
+      );
+    }
+
+    function App() {
+      return (
+        <>
+          <ChatInput />
+          <ChatMessages />
         </>
       );
     }
